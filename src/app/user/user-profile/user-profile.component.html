@@ -1,0 +1,160 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <p></p>
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Modifer mon profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="userFormGroup" (ngSubmit)="onUpdateUser()" novalidate>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nom" formControlName="firstName"
+                                            [ngModel]="user.firstName">
+                                        <div *ngIf="userFormGroup.controls['firstName'].invalid && (userFormGroup.controls['firstName'].dirty || userFormGroup.controls['firstName'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['firstName'].errors.required">
+                                                Nom est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Prenom" formControlName="lastName"
+                                            [ngModel]="user.lastName">
+                                        <div *ngIf="userFormGroup.controls['lastName'].invalid && (userFormGroup.controls['lastName'].dirty || userFormGroup.controls['lastName'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['lastName'].errors.required">
+                                                Prenom est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Adresse email" formControlName="email"
+                                            [ngModel]="user.email" type="email">
+                                        <div *ngIf="userFormGroup.controls['email'].invalid && (userFormGroup.controls['email'].dirty || userFormGroup.controls['email'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['email'].errors.required">
+                                                email est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Utilisateur nom" formControlName="userName"
+                                            type="text" [ngModel]="user.login">
+                                        <div *ngIf="userFormGroup.controls['userName'].invalid && (userFormGroup.controls['userName'].dirty || userFormGroup.controls['userName'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['userName'].errors.required">
+                                                user est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Changer ou Confirmer password" type="password"
+                                            [ngModel]="user.password" formControlName="password">
+                                        <div *ngIf="userFormGroup.controls['password'].invalid && (userFormGroup.controls['password'].dirty || userFormGroup.controls['password'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['password'].errors.required">
+                                                password est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Adresse" type="text" formControlName="adress"
+                                            [ngModel]="user.adress">
+                                        <div *ngIf="userFormGroup.controls['adress'].invalid && (userFormGroup.controls['adress'].dirty || userFormGroup.controls['adress'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['adress'].errors.required">
+                                                adresse est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Ville" formControlName="city" type="text"
+                                            [ngModel]="user.city">
+                                        <div *ngIf="userFormGroup.controls['city'].invalid && (userFormGroup.controls['city'].dirty || userFormGroup.controls['city'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['city'].errors.required">
+                                                ville est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput type="date" formControlName="dateNaissanced"
+                                            [ngModel]="date | date:'yyyy-MM-dd'">
+                                        <div *ngIf="userFormGroup.controls['dateNaissanced'].invalid && (userFormGroup.controls['dateNaissanced'].dirty || userFormGroup.controls['dateNaissanced'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['dateNaissanced'].errors.required">
+                                                dateNess est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="fax" type="text" formControlName="fax"
+                                            [ngModel]="user.fax">
+                                        <div *ngIf="userFormGroup.controls['fax'].invalid && (userFormGroup.controls['fax'].dirty || userFormGroup.controls['fax'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="userFormGroup.controls['fax'].errors.required">
+                                                fax est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Privilége</mat-label>
+                                        <mat-select [formControl]="groups" multiple required
+                                            [(ngModel)]="selectedOptions.permessions" multiple
+                                            [compareWith]="compareFn">
+                                            <mat-select-trigger>
+
+                                            </mat-select-trigger>
+                                            <mat-option (onSelectionChange)="getValues($event)"
+                                                *ngFor="let group of listGroups" [value]="group">
+                                                {{group.privileged}}</mat-option>
+                                        </mat-select>
+                                      
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit"
+                                [disabled]="userFormGroup.pristine || userFormGroup.invalid"
+                                class="btn btn-info pull-right">Modifier Profile</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

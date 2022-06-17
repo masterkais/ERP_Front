@@ -1,0 +1,66 @@
+<div class="main-content">
+  <div class="container">
+      <nav-bar-request-transfert></nav-bar-request-transfert>
+<p></p>
+<div class="row">
+<ng-container>
+  <ng-container class="p-4">
+    <div class="col-12 text-center">
+      <div >
+        <div *ngIf="products">
+          <div><h3>{{title}}</h3></div>
+          <div *ngFor="let p of products">
+            <div class="col">
+            <div class="panel  heigted">
+              <div class="panel-heading">{{p.name}}</div>
+              <div class="panel-body">
+                <img class="img-thumbnail img-rounded btn" (click)="onProductDetails(p)" [src]=""/>
+                <div>
+                  <button (click)="onEditPhoto(p)">
+                    <span class="glyphicon glyphicon-edit"></span>
+                  </button>
+                  <p *ngIf="editPhoto && currentProduct==p">
+                    <input type="file" >
+                  </p>
+                </div>
+                <div>
+                  {{p.description}}
+                </div>
+                <div>
+                  <label>Price : {{p.buyingPrice|number:'0.00'}}</label>
+                </div>
+                <div>
+                <span *ngIf="p.state">
+                        <img src="assets/images/promo.png" class="img-thumbnail img-circle" height="30">
+                      </span>
+                  <span *ngIf="p.active">
+                        <img src="assets/images/favorite.png" class="img-thumbnail img-circle" height="30">
+                      </span>
+                  <span *ngIf="p.active">
+                        <img src="assets/images/available.png" class="img-thumbnail img-circle"  height="30">
+                      </span>
+                </div>
+                <div>
+                  <form #f="ngForm"  (ngSubmit)="onAddProductToCaddy(p)">
+                    <label class="control-label">Quantité :</label>
+                    <input type="number" name="quantity" [(ngModel)]="p.quantity" ngModel style="width: 40px">
+                    <button>
+                      <img src="assets/images/caddy.png">
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+</div>
+</div>
+</div>
+  
+
+

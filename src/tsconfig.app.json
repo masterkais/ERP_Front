@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "module": "es2020",
+    "target": "es5",
+    "downlevelIteration": true,
+    "baseUrl": "",
+    "types": []
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,32 @@
+  <div class="row">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter par mot</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+    </mat-form-field>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Progress Column -->
+      <ng-container matColumnDef="privileged">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> privilége </th>
+        <td mat-cell *matCellDef="let row"> {{row.privileged}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <a class="settings" title="Edit" (click)="onEdit(row)"><i class="material-icons">&#xE8B8;</i></a>
+          <div class="space"></div>
+          <a class="delete" title="Delete" (click)="onDelete(row)"><i class="material-icons">&#xE5C9;</i></a>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Introuvable !"{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>

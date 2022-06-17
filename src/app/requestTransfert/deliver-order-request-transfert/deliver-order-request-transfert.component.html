@@ -1,0 +1,74 @@
+<div class="main-content">
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand"> </a>
+                <form class="d-flex">
+          <button class="btn btn-outline-info" (click)="onRetourVersLigneTransfert()">Retour vers les lignes de transferts</button>
+                </form>
+            </div>
+        </nav>
+        <p></p>
+        <div class="row">
+            <ng-container>
+                <ng-container class="p-4">
+                    <div class="col-12 text-center">
+                        <div>
+                            <div class="main-content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <p></p>
+                                            <div class="card">
+                                                <div class="card-header card-header-info">
+                                                    <h4 class="card-title">Livraison demande de transfert</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form [formGroup]="deliverFormGroup" (ngSubmit)="onDeliverOrder()"
+                                                        novalidate>
+                                                        <div class="row">
+                                                            <mat-form-field appearance="mat-form-field-flex" [style.width.%]="70">
+                                                                <mat-label>Chauffeurs</mat-label>
+                                                                <mat-select required formControlName="deliverMans" multiple
+                                                                     [compareWith]="compareFnDeliver">
+                                                                    <mat-option
+                                                                        (onSelectionChange)="getValuesDeliver($event)"
+                                                                        *ngFor="let deliver of deliverMans"
+                                                                        [value]="deliver">
+                                                                        {{deliver.firstName}} {{deliver.lastName}}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="row">
+                                                            <mat-form-field appearance="fill" [style.width.%]="70">
+                                                                <mat-label>Vehicules</mat-label>
+                                                                <mat-select formControlName="vehicules"  multiple
+                                                                    [compareWith]="compareFnVehicule">
+                                                                    <mat-option
+                                                                        (onSelectionChange)="getValuesVehicule($event)"
+                                                                        *ngFor="let vehicule of vehicules"
+                                                                        [value]="vehicule">
+                                                                        {{vehicule.lable}} {{vehicule.serialNumber}}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <button mat-raised-button type="submit"   [disabled]="deliverFormGroup.pristine || deliverFormGroup.invalid"
+                                                            class="btn btn-info pull-right">Livrer demande</button>
+                                                        <div class="clearfix"></div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>

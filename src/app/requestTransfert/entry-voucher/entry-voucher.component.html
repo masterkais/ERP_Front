@@ -1,0 +1,187 @@
+<div class="main-content">
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand"> </a>
+                <form class="d-flex">
+          <button class="btn btn-outline-info" (click)="onRetourVersDemandes()">Retour vers demandes transfert</button>
+                    <button class="btn btn-outline-info me-2" (click)="downloadAsPDF()" id="btnPrint" data-toggle="tooltip"
+                        title="Export">Exporter en PDF</button>
+                </form>
+            </div>
+        </nav>
+        <p></p>
+        <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+        <div class="row" *ngIf="loaded | async">
+            <ng-container>
+                <ng-container class="p-4">
+                    <div class="col-12 text-center">
+                        <div>
+                            <div class="container" id="pdf">
+                                <div class="page-header">
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-offset-3 body-main">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <img class="img" alt="Invoce Template"
+                                                            src="http://pngimg.com/uploads/shopping_cart/shopping_cart_PNG59.png"
+                                                            width="100px" height="" />
+                                                    </div>
+                                                    <div class="col-md-8 text-right">
+                                                        <h4 style="color: #F81D2D;"><strong>Société industrielle
+                                                                mega</strong></h4>
+                                                        <p>Responsable livraison : {{user.firstName}} {{user.lastName}}
+                                                        </p>
+                                                        <p>Date :
+                                                            {{formaterDate(entryVoucher.dateEntry)}}
+                                                        </p>
+                                                        <p>Adress email: {{user.email}}</p>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <h2>Bon d'entrée</h2>
+                                                        <h5>Numéro : {{entryVoucher.id}}</h5>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    <table class="table" id="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    <h5>Marque</h5>
+                                                                </th>
+                                                                <th>
+                                                                    <h5>Categorie</h5>
+                                                                </th>
+                                                                <th>
+                                                                    <h5>Produit</h5>
+                                                                </th>
+                                                                <th>
+                                                                    <h5>Quantité</h5>
+                                                                </th>
+                                                                <th>
+                                                                    <h5>Numero de serie</h5>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of transerts">
+                                                                <td class="col-md-3">
+                                                                        {{item.ltds[0].product.category.brand.name}}
+                                                                </td>
+                                                                <td class="col-md-3">
+                                                                        {{item.ltds[0].product.category.name}}
+                                                                </td>
+                                                                <td class="col-md-3">
+                                                                    <ul>
+                                                                        <li *ngFor="let i of item.ltds">
+                                                                            {{i.product.name}}</li>
+                                                                    </ul>
+                                                                </td>
+                                                                <td class="col-md-3">
+                                                                    
+                                                                  {{item.lt.quantity}}
+                                                                    
+                                                                
+                                                            </td>
+                                                                <td class="col-md-3">
+                                                                    
+                                                                        <li *ngFor="let i of item.ltds">{{i.product.id}}
+                                                                        </li>
+                                                                    
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right">
+                                                                    <p>
+                                                                        <strong>palette: </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <strong>Chauffeur: </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <strong>Vehicule: </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <strong>Site source: </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <strong>Site destination: </strong>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p>
+                                                                        <strong><i area-hidden="true"></i>
+                                                                            {{requestTransfert.numberPalette}} </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <strong><i area-hidden="true"></i>
+                                                                            <li *ngFor="let d of drivers">
+                                                                                {{d.firstName}} {{d.lastName}}</li>
+                                                                        </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <strong>
+                                                                            <li *ngFor="let v of vehicules">{{v.lable}}
+                                                                                {{v.serialNumber}}</li>
+                                                                        </strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <strong><i area-hidden="true"></i>
+                                                                            {{requestTransfert.siteSource}}</strong>
+                                                                    </p>
+                                                                    <p>
+                                                                        <strong><i area-hidden="true"></i>
+                                                                            {{requestTransfert.siteDestinaion}}</strong>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="color: #F81D2D;">
+                                                                <td class="text-right">
+                                                                    <h4><strong>Total:</strong></h4>
+                                                                </td>
+                                                                <td class="text-left">
+                                                                    <h4 id="total"><strong><i class="fas fa-rupee-sign"
+                                                                                area-hidden="true"></i> {{ total }}
+                                                                        </strong>
+                                                                    </h4>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div>
+                                                    <div class="col-md-12">
+                                                        <p><b>Date :</b>  {{formaterDate(entryVoucher.dateEntry)}}</p>
+                                                        <br />
+                                                        <p><b>Signature</b></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<script>
+    var table = document.getElementById("table"), sumVal = 0;
+    for (var i = 1; i < table.rows.length; i++) {
+        sumVal = sumVal + table.rows[i].cells[3].innerHTML;
+    }
+    document.getElementById("total").innerHTML = sumVal;
+    console.log(sumVal);
+</script>

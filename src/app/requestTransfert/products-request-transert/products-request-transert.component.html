@@ -1,0 +1,148 @@
+<div class="main-content">
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand"> </a>
+              <form class="d-flex">
+                <button class="btn btn-outline-info me-2" >Ajouter</button>
+              </form>
+            </div>
+          </nav>
+  <p></p>
+  <div class="row">
+  <ng-container>
+    <ng-container class="p-4">
+      <div class="col-12 text-center">
+        <div >
+            <div class="row">
+                <mat-form-field appearance="standard">
+                  <mat-label>Filter par mot</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                </mat-form-field>
+                <mat-form-field style="margin-right:10px;margin-left:10px" appearance="standard">
+                  <mat-label>Filtre par Disponibilité</mat-label>
+                  <mat-select name="groups">
+                    <mat-option (click)="getAllProducts()">
+                      Tous
+                    </mat-option>
+                    <mat-option (click)="getAllProductDiponible()">Disponible</mat-option>
+                    <mat-option (click)="getAllProductNonDisponible()">Non Disponible</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin-right:10px;margin-left:10px" appearance="standard">
+                  <mat-label>Filtre par Promotion</mat-label>
+                  <mat-select name="acives">
+                    <mat-option (click)="getAllProducts()">
+                      Tous
+                    </mat-option>
+                    <mat-option (click)="getAllProductPromotion()">Promotion</mat-option>
+                    <mat-option (click)="getAllProductNonPromotion()">Non Promotion</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin-right:10px;margin-left:10px" appearance="standard">
+                  <mat-label>Filtre par Site stock</mat-label>
+                  <mat-select name="acives">
+                    <mat-option (click)="getAllProducts()">
+                      Tous
+                    </mat-option>
+                    <mat-option *ngFor="let site of listSiteStock" [value]="site" (click)="applyFilterSiteStock(site)">
+                      {{site.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                  <mat-form-field style="margin-right:10px;margin-left:10px" appearance="standard">
+                    <mat-label>Filtre par Categories</mat-label>
+                    <mat-select name="acives">
+                      <mat-option (click)="getAllProducts()">
+                        Tous
+                      </mat-option>
+                      <mat-option *ngFor="let category of listCategory" [value]="category" (click)="applyFilterCategory(category)">
+                        {{category.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  
+              </div>
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                    <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="sellingPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix vente </th>
+                    <td mat-cell *matCellDef="let row"> {{row.sellingPrice}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="buyingPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix Achat </th>
+                    <td mat-cell *matCellDef="let row"> {{row.buyingPrice}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="state">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Promotion </th>
+                    <td mat-cell *matCellDef="let row">
+                      <span *ngIf="row.state" class="status text-success">&bull;</span>
+                      <span *ngIf="!row.state" class="status text-danger">&bull;</span>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="active">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Disponible </th>
+                    <td mat-cell *matCellDef="let row">
+                      <span *ngIf="row.active" class="status text-success">&bull;</span>
+                      <span *ngIf="!row.active" class="status text-danger">&bull;</span>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="categoryId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Categorie </th>
+                    <td mat-cell *matCellDef="let row "> {{row.categoryId.name}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="siteStockId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Site stock </th>
+                    <td mat-cell *matCellDef="let row "> {{row.siteStockId.name}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                    <td mat-cell *matCellDef="let row">
+                      <a *ngIf="row.active" title="Non Disponible" (click)="onNotDispo(row)"><i
+                          class="material-icons">thumb_down</i></a>
+                      <a *ngIf="!row.active" title="Disponible" (click)="onDispo(row)"><i class="material-icons">thumb_up</i></a>
+                      <div class="space"></div>
+                      <a class="settings" title="Edit" (click)="onEdit(row)"><i class="material-icons">&#xE8B8;</i></a>
+                      <div class="space"></div>
+                      <a class="delete" title="Delete" (click)="onDelete(row)"><i class="material-icons">&#xE5C9;</i></a>
+                      <div class="space"></div>
+                      <a class="warning" title="Images" (click)="onShowImage(row)"><i class="material-icons">image_search</i></a>
+                      <div class="space"></div>
+                      <a *ngIf="row.state" class="primary" title="NonPromo" (click)="onNotPromo(row)"><i
+                          class="material-icons">visibility_off</i></a>
+                      <a *ngIf="!row.state" class="primary" title="Promo" (click)="onPromo(row)"><i
+                          class="material-icons">visibility</i></a>
+              
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  </div>
+  </div>
+  </div>
+    

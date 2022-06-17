@@ -1,0 +1,57 @@
+<div class="main-content">
+    <div class="container">
+  <user-nav-bar></user-nav-bar>
+  <p></p>
+  <div class="row">
+  <ng-container>
+      <ng-container *ngIf="initial">
+          <div class="col-12 text-center">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>  Initial ...</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="spinner-border text-warning" role="status">
+              <span class="visually-hidden"></span>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="chargement">
+          <div class="col-12 text-center">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>  Chargement ...</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="spinner-border text-success" role="status">
+              <span class="visually-hidden"></span>
+            </div>
+          </div>
+        </ng-container>
+  <ng-container *ngIf="error">
+      <div class="col-12 text-center">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>  Error ...</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="spinner-border text-danger" role="status">
+          <span class="visually-hidden">Error...</span>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="loaded" class="p-4">
+      <div class="col-12 text-center">
+        <div >
+          <list-user></list-user>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  </div>
+  </div>
+  </div>
+    

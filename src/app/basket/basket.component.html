@@ -1,0 +1,98 @@
+<div class="main-content">
+  <div class="container">
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="nav nav-pills">
+              <li>
+                <a class="delete" title="Ajouter basket" (click)="onAddBasket()" style="cursor: pointer;"><mat-icon>note_add</mat-icon></a>
+
+               
+              </li>
+              <li [ngClass]="c.name==basketService.currentBasketName?'active':''"
+                *ngFor="let c of basketService.listBaskets">
+                <a class="btn" (click)="onSelectBasket(c)">{{c.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <p></p>
+    <div class="card">
+      <div class="card-header card-header-info">
+        <h4 class="card-title">Initialiser une demande de transfert</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="requestTransfertFormGroup" novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field style="margin-right:10px;margin-left:10px" appearance="standard" [style.width.%]="50">
+                <mat-label>Site stock Source</mat-label>
+                <mat-select name="siteStockSource" formControlName="siteStockSource">
+                  <mat-option *ngFor="let siteStockSource of siteStocks" [value]="siteStockSource"
+                    (click)="getSource(siteStockSource)">
+                    {{siteStockSource.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field style="margin-right:10px;margin-left:10px" appearance="standard" [style.width.%]="50">
+                <mat-label>Site stock Destination</mat-label>
+                <mat-select name="siteStockDestination" formControlName="siteStockDestination">
+                  <mat-option *ngFor="let siteStockDestination of siteStocks" [value]="siteStockDestination"
+                    (click)="getDestination(siteStockDestination)">
+                    {{siteStockDestination.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <ng-container>
+            <ng-container class="p-4">
+              <div class="col-12 text-center">
+                <div>
+                  <div class="panel panel-default" *ngIf="basket.items">
+                    <div class="panel-heading">{{basket.name}}
+                    </div>
+                    <div class="panel-body">
+                      <table class="table table-bordered">
+                        <tr>
+                          <th>ID</th>
+                          <th>Nom</th>
+                          <th>Categorie</th>
+                          <th>Quantité</th>
+                          <th>Prix</th>
+                        </tr>
+                        <tr *ngFor="let item of basket.items|keyvalue">
+                          <td>{{item.value.id}}</td>
+                          <td>{{item.value.name}}</td>
+                          <td>{{item.value.idCategory}}</td>
+                          <td>{{item.value.quantity|number:'0.2'}}</td>
+                          <td>{{item.value.price|number:'0.2'}}</td>
+
+                          <td>
+        <a class="delete" style="cursor: pointer ;" title="Delete" (click)="onRemoveProductFromBasket(item.value)"><i class="material-icons">&#xE5C9;</i></a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3">Total</td>
+                          <td>{{getTotal()|number:'0.2'}}</td>
+                        </tr>
+                      </table>
+                      <button class="btn btn-info pull-right"
+                        [disabled]="requestTransfertFormGroup.pristine || requestTransfertFormGroup.invalid"
+                        (click)="onNewOrder()">Passer demande transfert</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>

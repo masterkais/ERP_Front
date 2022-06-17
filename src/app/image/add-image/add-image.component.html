@@ -1,0 +1,37 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <p></p>
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Ajouter image</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="imageFormGroup" (ngSubmit)="onSaveImage()" novalidate>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Image path" type="file"
+                                            formControlName="path">
+                                        <div *ngIf="imageFormGroup.controls['path'].invalid && (imageFormGroup.controls['path'].dirty || imageFormGroup.controls['path'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="imageFormGroup.controls['path'].errors.required">
+                                                path image est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit"
+                                [disabled]="imageFormGroup.pristine || imageFormGroup.invalid"
+                                class="btn btn-info pull-right">Ajouter Image</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

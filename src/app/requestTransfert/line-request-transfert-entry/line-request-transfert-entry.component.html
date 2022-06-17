@@ -1,0 +1,117 @@
+<div class="main-content">
+    <div class="container">
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand"> </a>
+          <form class="d-flex">
+            <button class="btn btn-outline-info me-2"  (click)="onGenereEntryVoucher()">Generer bon d'entrée</button>
+          </form>
+        </div>
+      </nav>
+      <p></p>
+      <div class="row">
+        <ng-container>
+          <ng-container class="p-4">
+            <div class="col-12 text-center">
+              <div>
+                <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource" matSort>
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="requestTransfertId">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Request </th>
+                      <td mat-cell *matCellDef="let row"> {{row.requestTransfertId}}</td>
+                    </ng-container>
+  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="categoryid">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Produit </th>
+                      <td mat-cell *matCellDef="let row">{{row.categoryid}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="quantity">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantité </th>
+                      <td mat-cell *matCellDef="let row"> {{row.quantity}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="state">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> status </th>
+                      <td mat-cell *matCellDef="let row "><span *ngIf="row.state"
+                          class="status text-success">&bull;</span>
+                        <span *ngIf="!row.state" class="status text-danger">&bull;</span>
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                      <td mat-cell *matCellDef="let row">
+                        <a *ngIf="row.state==3" class="primary" href="#exampleModalToggle" style="cursor: pointer;font-weight: bold;" data-bs-toggle="modal" title="Accepter ligne" (click)="onClick(row)"><i>
+                          <mat-icon>thumb_up_alt</mat-icon>
+                          </i></a>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                  </table>
+  
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">modifier le quantité de produit</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form [formGroup]="lineFormGroup" (ngSubmit)="onAccept()">
+              <div class="mb-3">
+                  <label for="Username">transferlineid<span class="text-danger">*</span></label>
+                  <input type="text" name="idLineTransfert" class="form-control" id="idLineTransfert" value="{{idLineTransfert}}" placeholder="idLineTransfert">
+              </div>
+              <div class="mb-3">
+                  <label for="Quantity">Quantité<span class="text-danger">*</span></label>
+                  <input type="number" min="0" max="{{maxQuantity}}" required [(ngModel)]="maxQuantity" formControlName="quantity" name="quantity" class="form-control" id="quantity" placeholder="Enter quantité">
+              </div>
+              <div class="mb-3 " >
+                <mat-form-field >
+                  <mat-label>Serial number</mat-label>
+                  <mat-select formControlName="products" [formControl]="products" multiple required
+                      [compareWith]="compareFn">
+                      <mat-select-trigger>
+                      </mat-select-trigger>
+                      <mat-option  disabled="{{isFull}}" (onSelectionChange)="getValues($event)"
+                          *ngFor="let product of products" [value]="product">
+                          {{product}}</mat-option>
+                  </mat-select>
+                
+              </mat-form-field>
+            </div>
+            <div class="modal-footer pt-4">                  
+              <button type="submit" class="btn btn-success mx-auto w-100">Add produits</button>
+            </div>
+        </form>
+     
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" (click)="onReset()" data-bs-toggle="modal" data-bs-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

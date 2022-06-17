@@ -1,0 +1,81 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <p></p>
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Ajouter vehicule</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="VehiculeFormGroup" (ngSubmit)="onSaveVehicule()" novalidate>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Lable vehicule" formControlName="lable">
+                                        <div *ngIf="VehiculeFormGroup.controls['lable'].invalid && (VehiculeFormGroup.controls['lable'].dirty || VehiculeFormGroup.controls['lable'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="VehiculeFormGroup.controls['lable'].errors.required">
+                                                lable est obligatoir.
+                                            </div>
+                                            <div *ngIf="VehiculeFormGroup.controls['lable'].errors.minlength">
+                                                Le longeur minimale est 3.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="serie de vehicule" formControlName="serialNumber">
+                                        <div *ngIf="VehiculeFormGroup.controls['serialNumber'].invalid && (VehiculeFormGroup.controls['serialNumber'].dirty || VehiculeFormGroup.controls['serialNumber'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="VehiculeFormGroup.controls['serialNumber'].errors.required">
+                                                serie de voiture est obligatoir.
+                                            </div>
+                                            <div *ngIf="VehiculeFormGroup.controls['serialNumber'].errors.minlength">
+                                                Le longeur minimale est 3.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput type="date" placeholder="Date d'achat"
+                                            formControlName="datePurchase">
+                                        <div *ngIf="VehiculeFormGroup.controls['datePurchase'].invalid && (VehiculeFormGroup.controls['datePurchase'].dirty || VehiculeFormGroup.controls['datePurchase'].touched) "
+                                            class="alert alert-danger">
+                                            <div *ngIf="VehiculeFormGroup.controls['datePurchase'].errors.required">
+                                                date est obligatoir.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                    <mat-radio-group aria-labelledby="example-radio-group-label"
+                                        class="example-radio-group">
+                                        <mat-radio-button class="example-radio-button" [value]="1"
+                                            (change)="radioChange($event)">
+                                            Vehicule disponible</mat-radio-button>
+                                        <mat-radio-button class="example-radio-button" [value]="2"
+                                            (change)="radioChange($event)">
+                                            Vehicule non disponible</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit"
+                                [disabled]="VehiculeFormGroup.pristine || VehiculeFormGroup.invalid"
+                                class="btn btn-info pull-right">Ajouter Vehicule</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

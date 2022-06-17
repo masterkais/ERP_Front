@@ -1,0 +1,71 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <p></p>
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Ajouter categorie</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="categoryFormGroup" (ngSubmit)="onSaveCategory()" novalidate>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Nom categorie" formControlName="name">
+                                        <div *ngIf="categoryFormGroup.controls['name'].invalid && (categoryFormGroup.controls['name'].dirty || categoryFormGroup.controls['name'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="categoryFormGroup.controls['name'].errors.required">
+                                                nom categorie est obligatoir.
+                                            </div>
+                                            <div *ngIf="categoryFormGroup.controls['name'].errors.minlength">
+                                                Le longeur minimale est 3.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Description site stock"
+                                            formControlName="description">
+                                        <div *ngIf="categoryFormGroup.controls['description'].invalid && (categoryFormGroup.controls['description'].dirty || categoryFormGroup.controls['description'].touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="categoryFormGroup.controls['description'].errors.required">
+                                                description category est obligatoir.
+                                            </div>
+                                            <div *ngIf="categoryFormGroup.controls['description'].errors.minlength">
+                                                Le longeur minimale est 3.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-10">
+                                <mat-form-field style="margin-right:10px;margin-left:10px" appearance="standard">
+                                    <mat-label>Marque</mat-label>
+                                    <mat-select  name="brands">
+                                      
+                                      <mat-option *ngFor="let brand of listBrands" [value]="brand" (click)="getBrand(brand)">
+                                        {{brand.name}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                
+                              </div>
+                            </div>
+                            <button mat-raised-button type="submit"
+                                [disabled]="categoryFormGroup.pristine || categoryFormGroup.invalid"
+                                class="btn btn-info pull-right">Ajouter Category</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

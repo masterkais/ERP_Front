@@ -1,0 +1,20 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-body">
+              <ul class="nav nav-pills">
+                <li>
+                  <button (click)="onAddCaddy()" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-plus pull-right"></span>
+                  </button>
+                </li>
+                <li [ngClass]="c.name==caddyService.currentCaddyName?'active':''" *ngFor="let c of caddyService.listCaddies">
+                  <a class="btn" (click)="onSelectCaddy(c)">{{c.name}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+    </div>
+  </nav>
+
+
