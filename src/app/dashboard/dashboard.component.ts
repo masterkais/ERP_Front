@@ -8,6 +8,8 @@ import { GoogleChartInterface, GoogleChartType } from "ng2-google-charts";
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
 import { Observable, of } from "rxjs";
+import { Chart, BarElement, BarController, CategoryScale, Filler, Legend, Title, Tooltip , registerables} from 'chart.js';
+import { text } from "express";
 
 @Component({
   selector: "app-dashboard",
@@ -59,12 +61,15 @@ export class DashboardComponent implements OnInit {
   S2: any = [];
   PrStock: any = [];
   PrCategory: any = [];
-  arr: any[];
+  arr:  [any, any][] = []; 
   submit = false;
   constructor(
     public statistiqueService: StatistiqueService,
     private stockService: SiteStockService
-  ) {}
+  ) {
+    Chart.register(BarElement, BarController, CategoryScale,  Filler, Legend, Title, Tooltip );
+    Chart.register(...registerables);
+  }
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;
     seq = 0;
@@ -158,27 +163,40 @@ export class DashboardComponent implements OnInit {
   public pieChartType: ChartType = "pie";
   
   async ngOnInit() {
+    this.getData()
+    this.showChart1()
+    this.showChart2()
+  }
+ //api/statistique/getNumberProductsByCategorieV2
+    pieChart2: GoogleChartInterface = {
+      chartType: GoogleChartType.PieChart,
+      dataTable: this.test(),
+      options: { title: "Number Product by Category " },
+    }; 
+  async test(){
+   let cc =  [];
+    await this.statistiqueService.getNumberProductsByStockV2().then((data) => {
+      this.PrStock = data;
+      cc.push(["cc","ccc"])
+      this.PrStock.forEach((element) => {
+         Object.keys(element).map(function (key) {
+          cc.push([key,element[key]]);
+          //return cc;
+        });
+      });
+    });
+    return cc
+  }
+  async getData(){
+
+    
     await this.statistiqueService.getTotalVenteBy6MonthS1().then((data) => {
       this.S1 = data;
     });
     await this.statistiqueService.getTotalVenteBy6MonthS2().then((data) => {
       this.S2 = data;
     });
-    await this.statistiqueService.getNumberProductsByStockV2().then((data) => {
-      this.PrStock = data;
-      let arr = [];
-      this.PrStock.forEach((element) => {
-        this.arr = Object.keys(element).map(function (key) {
-          console.log(key);
-          console.log(element[key]);
-
-          arr.push(element[key]);
-          return arr;
-        });
-      });
-
-      console.log(this.arr);
-    });
+    
     await this.statistiqueService
       .getNumberProductsByCategorieV2()
       .then((data) => {
@@ -191,7 +209,7 @@ export class DashboardComponent implements OnInit {
     ];
     this.doughnutChartDatasets = [1,2,3]
     console.log(this.pieChartData);
-    console.log(this.pieChart2.dataTable);
+   // console.log(this.pieChart2.dataTable);
 
     await this.statistiqueService.getNumberOfCategory().then((data)=>{
       this.numberCategory=data;
@@ -370,30 +388,90 @@ export class DashboardComponent implements OnInit {
     this.startAnimationForBarChart(websiteViewsChart);
   }
 
- 
-  pieChart2: GoogleChartInterface = {
-    chartType: GoogleChartType.PieChart,
-    dataTable: [
-      ["Student", "Marks"],
-      ["A", 80],
-      ["B", 90],
-      ["C", 88],
-    ],
-    options: { title: "Student Marks" },
-  };
-  barChart: GoogleChartInterface = {
-    chartType: GoogleChartType.BarChart,
-    dataTable: [
-      ["Student", "Marks"],
-      ["A", 80],
-      ["B", 90],
-      ["C", 88],
-    ],
-    options: { title: "Student Marks" },
-  };
+  async showChart1(){
+    await this.statistiqueService.getNumberProductsByStockV2().then((data) => {
+    this.PrStock = data;
+    let labels=[]
+    let value=[]
+    this.PrStock.forEach((element) => {
+      Object.keys(element).map(function (key) {
+        labels.push(key);
+        value.push(element[key])
+      })
+    })
+    const ctx = (<any>document.getElementById('yudhatp-chart')).getContext('2d');
+        const chart = new Chart(ctx, {
+          //type: 'doughnut',
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+                  label: 'This is chart',
+                  data: [10,12],
+                  borderWidth: 1
+            }]
+           }
+        });
 
+    })
+    
+  }
+
+  async showChart2(){
+    await this.statistiqueService.getNumberProductsByCategorieV2().then((data) => {
+    this.PrStock = data;
+    let labels=[]
+    let value=[]
+    this.PrStock.forEach((element) => {
+      Object.keys(element).map(function (key) {
+        labels.push(key);
+        value.push(element[key])
+      })
+    })
+    const ctx = (<any>document.getElementById('yudhatp-chart2')).getContext('2d');
+        const chart = new Chart(ctx, {
+          type: 'doughnut',
+          //type: 'horizontalBar',
+          data: {
+            labels: labels,
+            datasets: [{
+                  label: 'cccc',
+                  data: [10,12],
+                  borderWidth: 1
+            }],  
+             
+           },
+           options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'rgb(255, 99, 132)'
+                    }
+                }
+            }
+        }
+
+        });
+
+    })
+    
+  }
   public GetDonuts(): Observable<any> {
     // return a bool, or even the calculated data.
     return of("some value");
   }
+  //api/statistique/getNumberProductsByStockV2
+  barChart: GoogleChartInterface = {
+    chartType: GoogleChartType.BarChart,
+    dataTable: [
+      ["Student", "Marks"],
+      ["A", 8],
+      ["B", 9],
+      ["C", 8],
+    ],
+    options: { title: "Student Marks" },
+  };
+
+
 }

@@ -1,131 +1,16 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-header card-header-warning card-header-icon">
-            <div class="card-icon">
-              <i class="material-icons">content_copy</i>
-            </div>
-            <p class="card-category">Utilisateur</p>
-            <h3 class="card-title"></h3>
-            <p class="card-category"><span class="text-success">clients</span></p>
-            <h3 class="card-title">{{ numberClient }}</h3>
-            <p class="card-category"><span class="text-success">responsables livraison</span></p>
-            <h3 class="card-title">{{ numberInvetary }}</h3>
-            <p class="card-category"><span class="text-success">responsables commerciale</span></p>
-            <h3 class="card-title">{{ numberPurshasing }}</h3>
-            <p class="card-category"><span class="text-success">Chauffeurs</span></p>
-            <h3 class="card-title">{{numberDelivery}}</h3>
-            <br>
-            <br>
-        
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-header card-header-danger card-header-icon">
-            <div class="card-icon">
-              <i class="fa fa-anchor" aria-hidden="true"></i>
-            </div>
-            <p class="card-category">Produits</p>
-            <h3 class="card-title">{{ numberProduct }}</h3>
-            <p class="card-category"><span class="text-success">Produits disponible</span></p>
-            <h3 class="card-title">{{ numberProductDisponible }}</h3>
-            <p class="card-category"><span class="text-success">Produits non disponible</span></p>
-            <h3 class="card-title">{{ numberProductNonDisponible }}</h3>
-            <p class="card-category"><span class="text-success">Produit promotionnel</span></p>
-            <h3 class="card-title">{{ numberProductPromo }}</h3>
-            <p class="card-category"><span class="text-success">Produit non promotionnel</span></p>
-            <h3 class="card-title">{{ numberProductNonPromo }}</h3>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-header card-header-success card-header-icon">
-            <div class="card-icon">
-              <i class="fa fa-eye" aria-hidden="true"></i>
-            </div>
-            <p class="card-category"> Site Stock</p>
-            <h3 class="card-title">{{siteStocks.length}}</h3>
-            <p class="card-category"><span class="text-success"> Site Stock disponible</span></p>
-            <h3 class="card-title">{{ numberSiteStockDisponible }}</h3>
-            <p class="card-category"><span class="text-success">Site Stock non disponible</span></p>
-            <h3 class="card-title">{{ numberSieStockNonDisponible }}</h3>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-header card-header-info card-header-icon">
-            <div class="card-icon">
-              <i class="fa fa-external-link-square" aria-hidden="true"></i>
-            </div>
-            <p class="card-category"><span class="text-success">Categories</span></p>
-            <h3 class="card-title">{{numberCategory}}</h3>
-          </div>
-        </div>
-        <div class="card card-stats">
-          <div class="card-header card-header-danger card-header-icon">
-            <div class="card-icon">
-              <i class="fa fa-cubes" aria-hidden="true"></i>
-            </div>
-            <p class="card-category"><span class="text-success">Marques</span></p>
-            <h3 class="card-title">{{numberBrand}}</h3>
-          </div>
-        </div>
-        <div class="card card-stats">
-          <div class="card-header card-header-success card-header-icon">
-            <div class="card-icon">
-              <i class="fa fa-car" aria-hidden="true"></i>
-            </div>
-            <p class="card-category"><span class="text-success">Vehicules</span></p>
-            <h3 class="card-title">{{ numberVehicule }}</h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-header card-header-warning card-header-icon">
-            <div class="card-icon">
-              <i class="fa fa-bar-chart" aria-hidden="true"></i>
-            </div>
-            <p class="card-category"><span class="text-success">Demandes transfert</span></p>
-            <h3 class="card-title">{{ numberRequest }}</h3>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-header card-header-danger card-header-icon">
-            <div class="card-icon">
-              <i class="fa fa-industry" aria-hidden="true"></i>
-            </div>
-            <p class="card-category"><span class="text-success">Commandes</span></p>
-            <h3 class="card-title">{{NumberOfsalesOrder}}</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-md-4">
         <div class="card card-chart">
           <div class="card-header card-header-success">
             <div class="ct-chart" id="dailySalesChart"></div>
           </div>
           <div class="card-body">
-            <h4 class="card-title">Ventes quotidienne</h4>
+            <h4 class="card-text-success">Ventes quotidienne</h4>
             <p class="card-category">
-              <span class="text-success">Nombre de commandes :
-                {{numberOfSalesByCurrentDay}}</span>
+            <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberOfSalesByCurrentDay }}"
+                matBadgeOverlap="false">Nombre de commandes </span>
             </p>
           </div>
           <div class="card-footer">
@@ -139,8 +24,9 @@
             <div class="ct-chart" id="websiteViewsChart"></div>
           </div>
           <div class="card-body">
-            <h4 class="card-title">Vente de semaine</h4>
-            <p class="card-category"><span class="text-success">Nombre de commandes :</span> {{numberOfSalesByCurrentWeek}}</p>
+            <h4 class="card-text-success">Vente de semaine</h4>
+            <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberOfSalesByCurrentWeek }}"
+                matBadgeOverlap="false">Nombre de commandes </span></p>
           </div>
           <div class="card-footer">
             <div class="stats">
@@ -155,8 +41,9 @@
             <div class="ct-chart" id="completedTasksChart"></div>
           </div>
           <div class="card-body">
-            <h4 class="card-title">Vente de mois</h4>
-            <p class="card-category"><span class="text-success">Nombre de commandes :</span> {{numberOfSalesByCurrentMonth}}</p>
+            <h4 class="card-text-success">Vente de mois</h4>
+            <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberOfSalesByCurrentMonth }}"
+                matBadgeOverlap="false">Nombre de commandes </span></p>
           </div>
           <div class="card-footer">
             <div class="stats">
@@ -165,18 +52,170 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12">
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-bar-chart" aria-hidden="true"></i>
+            </div>
+            <p class="card-category"><span class="card-text-success" matBadge="{{ numberRequest }}"
+                matBadgeOverlap="false">Demandes transfert</span></p>
+            <p class="card-categorie"><span class="card-textCat">Pas d'autre information</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-industry" aria-hidden="true"></i>
+            </div>
+            <p class="card-category"><span class="card-text-success" matBadge="{{ NumberOfsalesOrder }}"
+                matBadgeOverlap="false">Commandes</span></p>
+            <p class="card-categorie"><span class="card-textCat">Pas d'autre information</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div style="
+        max-height: 100px;
+    "><canvas id="yudhatp-chart"></canvas></div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-cubes" aria-hidden="true"></i>
+            </div>
+            <p class="card-category"><span class="card-text-success" matBadge="{{ numberBrand }}"
+                matBadgeOverlap="false">Marques</span></p>
+            <p class="card-categorie"><span class="card-textCat">Pas d'autre information</span></p>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-car" aria-hidden="true"></i>
+            </div>
+            <p class="card-category"><span class="card-text-success" matBadge="{{ numberVehicule }}"
+                matBadgeOverlap="false">Vehicules</span></p>
+            <p class="card-categorie"><span class="card-textCat">Pas d'autre information</span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-external-link-square" aria-hidden="true"></i>
+            </div>
+            <p class="card-category"><span class="card-text-success" matBadge="{{ numberCategory }}"
+                matBadgeOverlap="false">Categories</span></p>
+            <p class="card-categorie"><span class="card-textCat">Pas d'autre information</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div style="
+        max-height: 100px;
+    "><canvas id="yudhatp-chart2"></canvas></div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats big-card">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">content_copy</i>
+            </div>
+            <p class="card-text-success card-big">Utilisateur</p>
+            <div class="card-cat">
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberClient }}"
+                  matBadgeOverlap="false">clients</span></p>
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberInvetary }}"
+                  matBadgeOverlap="false">responsables livraison</span></p>
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberPurshasing }}"
+                  matBadgeOverlap="false">responsables commerciale</span></p>
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberDelivery }}"
+                  matBadgeOverlap="false">Chauffeurs</span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats big-card">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-anchor" aria-hidden="true"></i>
+            </div>
+            <p class="card-text-success card-big">Produits</p>
+            <div class="card-cat">
+              <!--<h3 class="card-title">{{ numberProduct }}</h3>-->
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberProductDisponible }}"
+                  matBadgeOverlap="false">Produits disponible</span></p>
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberProductPromo }}"
+                  matBadgeOverlap="false">Produit promotionnel</span></p>
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberProductNonDisponible }}"
+                  matBadgeOverlap="false">Produits non disponible</span></p>
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberProductNonPromo }}"
+                  matBadgeOverlap="false">Produit non promotionnel</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        
+      </div>
+    
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card card-stats big-card">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            </div>
+            <p class="card-text-success card-big"> Site Stock</p>
+            <div class="card-cat">
+              <!--<h3 class="card-title">{{siteStocks.length}}</h3>-->
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberSiteStockDisponible }}"
+                  matBadgeOverlap="false"> Site Stock disponible</span></p>
+              <p class="card-category"><span class="card-sousCateg" matBadge="{{ numberSieStockNonDisponible }}"
+                  matBadgeOverlap="false">Site Stock non disponible</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- <div class="col-md-12">
         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
           [legend]="barChartLegend" [type]="'bar'">
         </canvas>
       </div>
-    
+
       <div class="row">
         <google-chart [data]="pieChart2"></google-chart>
       </div>
       <div class="row">
         <google-chart [data]="barChart"></google-chart>
       </div>
+    </div>-->
+    <div>
     </div>
   </div>
 </div>
