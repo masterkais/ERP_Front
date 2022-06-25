@@ -65,7 +65,6 @@ export class ListUserComponent implements OnInit {
   }
   getAllUser() {
     this.serviceUser.getAllUser().subscribe((users) => {
-      console.log("ajout avec succé");
       this.users = users;
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.paginator = this.paginator;

@@ -9097,7 +9097,7 @@ button:focus {
     width: 18px;
     text-align: center; }
   .card.card-chart .card-category {
-    margin: 0; }
+    margin-top: 25px; }
   .card .card-body + .card-footer,
   .card .card-footer {
     padding: 0;

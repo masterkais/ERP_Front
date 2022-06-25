@@ -45,3 +45,7 @@
     opacity: 41%;
     margin-bottom: 5px;
 }
+.mat-badge-medium.mat-badge-after .mat-badge-content{
+    right: -25px;
+
+}
