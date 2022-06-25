@@ -157,14 +157,17 @@ export class ListUserComponent implements OnInit {
       }
     });
   }
-  formaterDate(date:string[]){
-  this.yyyy=date[0];
-  this.mm=date[1];
-  this.jj=date[2];
-  if(this.mm.toString.length==1){
-    return this.yyyy+"- 0"+this.mm+"-"+this.jj;
-  }else {
-    return this.yyyy+"-"+this.mm+"-"+this.jj;
-  }
+formaterDate(date){
+    let d = new Date(date)
+    let month = '' + (d.getMonth() + 1)
+    let day = '' + d.getDate()
+    let year = d.getFullYear();
+ 
+     if (month.length < 2) 
+         month = '0' + month;
+     if (day.length < 2) 
+         day = '0' + day;
+ 
+     return [year, month, day].join('-');
   }
 }
