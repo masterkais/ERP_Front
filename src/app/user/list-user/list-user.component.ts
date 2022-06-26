@@ -40,7 +40,7 @@ export class ListUserComponent implements OnInit {
   groups?: any[] = [];
   group?: Group;
   dateNess: string;
-  jj:string;mm:string;yyyy:string;
+  jj: string; mm: string; yyyy: string;
   splitted: string[];
   users: User[];
   search: any;
@@ -145,7 +145,7 @@ export class ListUserComponent implements OnInit {
   onDesactive(user: User) {
     this.serviceUser.verifierUserNameExiste(user.login).subscribe((res) => {
       if (res != null) {
-        res.active =false;
+        res.active = false;
         this.serviceUser.editUser(res).subscribe((res) => {
           this.toast.success({
             detail: "Utilisateur est en mode inactive !",
@@ -156,17 +156,19 @@ export class ListUserComponent implements OnInit {
       }
     });
   }
-formaterDate(date){
-    let d = new Date(date)
-    let month = '' + (d.getMonth() + 1)
-    let day = '' + d.getDate()
-    let year = d.getFullYear();
- 
-     if (month.length < 2) 
-         month = '0' + month;
-     if (day.length < 2) 
-         day = '0' + day;
- 
-     return [year, month, day].join('-');
+  formaterDate(date) {
+    if (date) {
+      let d = new Date(date)
+      let month = '' + (d.getMonth() + 1)
+      let day = '' + d.getDate()
+      let year = d.getFullYear();
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+
+      return [year, month, day].join('-');
+    }
   }
 }
