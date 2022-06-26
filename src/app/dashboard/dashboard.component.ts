@@ -134,6 +134,13 @@ export class DashboardComponent implements OnInit {
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
+    plugins: {
+      title: {
+          display: true,
+          text: 'Nombre des produits par stock',
+          position: 'bottom'
+      }
+  }
   };
   public barChartLabels = ["2017", "2018", "2019", "2020", "2021", "2022"];
   public barChartType = "bar";
@@ -407,10 +414,19 @@ export class DashboardComponent implements OnInit {
             labels: labels,
             datasets: [{
                   label: 'This is chart',
-                  data: [10,12],
+                  data: value,
                   borderWidth: 1
             }]
-           }
+           },
+           options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Nombre des produits par stock',
+                    position: 'bottom'
+                }
+            }
+        }
         });
 
     })
@@ -443,15 +459,14 @@ export class DashboardComponent implements OnInit {
            },
            options: {
             plugins: {
-                legend: {
+                title: {
                     display: true,
-                    labels: {
-                        color: 'rgb(255, 99, 132)'
-                    }
+                    text: 'Nombre des produits par categorie',
+                    position: 'bottom'
                 }
             }
         }
-
+        
         });
 
     })
