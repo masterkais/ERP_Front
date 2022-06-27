@@ -4,6 +4,7 @@ import { environment } from "environments/environment";
 import { Observable } from "rxjs";
 import { Category } from "../models/category.model";
 import { RequestTransfert } from "../models/requestTransfert.model";
+import { sale } from "../models/sale.model";
 
 @Injectable({
   providedIn: "root",
@@ -13,6 +14,9 @@ export class RequestTransfertService {
   constructor(private http: HttpClient) {}
   public getAllRequestTransfert(): Observable<RequestTransfert[]> {
     return this.http.get<RequestTransfert[]>(this.host + "/requestTransfert/requestTransfers");
+  }
+  public getAllSales(): Observable<sale[]> {
+    return this.http.get<sale[]>(this.host + "/salesorder/sales");
   }
   public getAllRequestTransfertByUser(userId:number): Observable<RequestTransfert[]> {
     return this.http.get<RequestTransfert[]>(this.host + "/requestTransfert/requestTransfers/"+userId);

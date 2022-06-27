@@ -117,6 +117,9 @@ import { NgChartsModule as ChartsModule} from 'ng2-charts';
 import * as FusionCharts from "fusioncharts";
 import * as charts from "fusioncharts/fusioncharts.charts";
 import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import { SalesComponent } from './sales/sales.component';
+import { ListSalesComponent } from './sales/list-sales/list-sales.component';
+import { NavbarSalesComponent } from './sales/navbar-sales/navbar-sales.component';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
   imports: [
@@ -226,6 +229,9 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     EntryVoucherComponent,
     ExitVoucherComponent,
     LineRequestTransfertEntryComponent,
+    SalesComponent,
+    ListSalesComponent,
+    NavbarSalesComponent,
   ],
   providers: [LineRequestTransfertService ,BasketService, AuthenticationService, GroupService,UserService,DatePipe,DialogService,InterceptorService,AuthentificationServiceService,TokenInterceptorProvider],
   bootstrap: [AppComponent],

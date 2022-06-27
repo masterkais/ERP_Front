@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
 import { Category } from "../models/category.model";
+import { sale } from "../models/sale.model";
 
 @Injectable({
   providedIn: "root",
@@ -31,5 +32,8 @@ export class CategoryService {
   }
   getCategoryByIdV2(id: number): Promise<Category> {
     return this.http.get<Category>(this.host + "/category/" + id).toPromise();
+  }
+  getAllSales(): Promise<sale> {
+    return this.http.get<sale>(this.host + "/salesorder/sales/").toPromise();
   }
 }

@@ -1,0 +1,53 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Progress Column -->
+    <ng-container matColumnDef="dateCreated">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date creation </th>
+      <td mat-cell *matCellDef="let row"> {{row.dateCreated}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="dateAccpted">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date traitement </th>
+      <td mat-cell *matCellDef="let row"><p *ngIf="row.dateAccpted"> {{formaterDate(row.dateAccpted)}} </p><span *ngIf="!row.dateAccpted"><mat-icon>minimize</mat-icon></span></td>
+    </ng-container>
+    <ng-container matColumnDef="numberPalette">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Numbre palette  </th>
+      <td mat-cell *matCellDef="let row"> <p *ngIf="row.numberPalette">{{row.numberPalette}} </p><span *ngIf="!row.numberPalette"><mat-icon>minimize</mat-icon></span></td>
+    </ng-container>
+    <ng-container matColumnDef="purchasingManager">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Commerciale </th>
+      <td mat-cell *matCellDef="let row"><p *ngIf="row.purchasingManagerId"> {{row.purchasingManagerId.firstName}} {{row.purchasingManagerId.lastName}}</p> <span *ngIf="!row.purchasingManagerId"><mat-icon>minimize</mat-icon></span></td>
+    </ng-container>
+    <ng-container matColumnDef="client">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+        <td mat-cell *matCellDef="let row"><p *ngIf="row.clientId"> {{row.clientId.firstName}} {{row.clientId.lastName}} </p> <span *ngIf="!row.clientId"><mat-icon>minimize</mat-icon></span></td>
+    </ng-container>
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> status </th>
+      <td mat-cell *matCellDef="let row "><span *ngIf="row.state" class="status text-success">&bull;</span>
+          <span *ngIf="!row.state" class="status text-danger">&bull;</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="totalSale">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total commande </th>
+          <td mat-cell *matCellDef="let row "> <p *ngIf="row.totalSale">{{row.totalSale}}</p><span *ngIf="!row.totalSale"><mat-icon>minimize</mat-icon></span></td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+      <td mat-cell *matCellDef="let row">
+        <a *ngIf="row.state==0" class="primary" title="Envoyer demande"><i><mat-icon>done_outline</mat-icon></i></a>
+        <a *ngIf="row.state==0" class="primary" title="Imprimer le bon d'entrer"><i><mat-icon>assignment_turned_in</mat-icon></i></a>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

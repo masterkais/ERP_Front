@@ -26,6 +26,7 @@ import { RequestTransfertComponent } from "app/requestTransfert/request-transfer
 import { AddRowMaterialComponent } from "app/rowMaterial/add-row-material/add-row-material.component";
 import { EditRowMaterialComponent } from "app/rowMaterial/edit-row-material/edit-row-material.component";
 import { RowMaterialComponent } from "app/rowMaterial/row-material.component";
+import { SalesComponent } from "app/sales/sales.component";
 import { AddSiteStockComponent } from "app/siteStock/add-site-stock/add-site-stock.component";
 import { EditSiteStockComponent } from "app/siteStock/edit-site-stock/edit-site-stock.component";
 import { SiteStockComponent } from "app/siteStock/site-stock.component";
@@ -66,7 +67,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "product", component: ProductComponent },
   { path: "product/edit-product/:id", component: EditProductComponent },
   { path: "product/add-product", component: AddProductComponent},
-
   { path: "requestTransfert/product-requestTransfert", component: ProductsRequestTransertComponent},
   { path: "requestTransfert/category-requestTransfert", component: CategoryssRequestTransertComponent},
   { path: "rowMatiere", component: RowMaterialComponent },
@@ -80,5 +80,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "requestTransfert/entryVoucher/:id", component:EntryVoucherComponent},
   { path: "requestTransfert/exitVoucher/:id", component:ExitVoucherComponent},
   { path: "requestTransfertLinesEntry/:id", component:LineRequestTransfertEntryComponent},
+  { path: "sales", component: SalesComponent},
 
 ];
