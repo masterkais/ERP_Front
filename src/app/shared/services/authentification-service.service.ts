@@ -10,7 +10,7 @@ import { User } from '../models/user.module';
   providedIn: 'root'
 })
 export class AuthentificationServiceService {
-private host:string="http://localhost:8081";
+private host:string="https://acfb-196-179-94-188.eu.ngrok.io";
 private jwt:string="";
 private jwToken:any;
 private roles:Array<any>=[];
@@ -63,4 +63,18 @@ getCurrentUser(): Observable<User> {
 async getUser(){
 await this.getCurrentUser().subscribe((data)=>{this.user=data;console.log(this.user.login)});
 }
+
+showLoading() {
+
+  $("html").css("overflow", "hidden")
+  $(".app-loading").css("margin-top", $("html").scrollTop() + "px")
+  $(".app-loading").css("display", "flex");
+}
+
+hideLoading() {
+
+  $("html").css("overflow", "auto")
+  $(".app-loading").css("display", "none");
+}
+
 }

@@ -41,6 +41,7 @@ import { VehiculeComponent } from "app/vehicule/vehicule.component";
 import { DashboardComponent } from "../../dashboard/dashboard.component";
 
 export const AdminLayoutRoutes: Routes = [
+  { path: "", component: DashboardComponent },
   { path: "dashboard", component: DashboardComponent },
   { path: "user", component: UserComponent },
   { path: "user/edit-user/:id", component: EditUserComponent },

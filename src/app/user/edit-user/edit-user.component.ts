@@ -49,12 +49,18 @@ export class EditUserComponent implements OnInit {
     this.userService.getUserById(this.idUser).subscribe((user) => {
       user.password = "";
       this.user = user;
-      let ss =
-        user.dateNaissanced[0] +
-        "/" +
-        user.dateNaissanced[1] +
-        "/" +
-        user.dateNaissanced[2];
+
+      let d = new Date(user.dateNaissanced)
+      let month = '' + (d.getMonth() + 1)
+      let day = '' + d.getDate()
+      let year = d.getFullYear();
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+      let ss = [year, month, day].join('-');
+  
       this.date = new Date(ss);
       this.selectedOptions.permessions = user.groupIds;
       this.ids = user.groupIds;

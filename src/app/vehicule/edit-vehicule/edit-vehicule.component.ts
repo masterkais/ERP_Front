@@ -42,12 +42,16 @@ export class EditVehiculeComponent implements OnInit {
 
   ngOnInit(): void {
     this.vehiculeService.getVehiculeById(this.idVehicule).subscribe((data)=>{
-      let ss =
-        data.datePurchase[0] +
-        "/" +
-        data.datePurchase[1] +
-        "/" +
-        data.datePurchase[2];
+      let d = new Date(data.datePurchase)
+      let month = '' + (d.getMonth() + 1)
+      let day = '' + d.getDate()
+      let year = d.getFullYear();
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+      let ss = [year, month, day].join('-');
       this.dat=new Date(ss);
       this.vehicule=data;
     })
