@@ -9,6 +9,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatBadgeModule } from '@angular/material/badge';
+
 Ng2GoogleChartsModule
 @NgModule({
   imports: [
@@ -18,9 +20,13 @@ Ng2GoogleChartsModule
     NgChartsModule,
     NgxChartsModule,
     Ng2GoogleChartsModule,
+    MatBadgeModule,
   ],
   declarations: [
     DashboardComponent,
+  ],
+  exports : [
+    MatBadgeModule
   ]
 })
 export class AdminLayoutModule {}

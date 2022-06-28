@@ -40,7 +40,7 @@ export class ListUserComponent implements OnInit {
   groups?: any[] = [];
   group?: Group;
   dateNess: string;
-  jj:string;mm:string;yyyy:string;
+  jj: string; mm: string; yyyy: string;
   splitted: string[];
   users: User[];
   search: any;
@@ -65,7 +65,6 @@ export class ListUserComponent implements OnInit {
   }
   getAllUser() {
     this.serviceUser.getAllUser().subscribe((users) => {
-      console.log("ajout avec succé");
       this.users = users;
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.paginator = this.paginator;
@@ -146,7 +145,7 @@ export class ListUserComponent implements OnInit {
   onDesactive(user: User) {
     this.serviceUser.verifierUserNameExiste(user.login).subscribe((res) => {
       if (res != null) {
-        res.active =false;
+        res.active = false;
         this.serviceUser.editUser(res).subscribe((res) => {
           this.toast.success({
             detail: "Utilisateur est en mode inactive !",
@@ -157,14 +156,19 @@ export class ListUserComponent implements OnInit {
       }
     });
   }
-  formaterDate(date:string[]){
-  this.yyyy=date[0];
-  this.mm=date[1];
-  this.jj=date[2];
-  if(this.mm.toString.length==1){
-    return this.yyyy+"- 0"+this.mm+"-"+this.jj;
-  }else {
-    return this.yyyy+"-"+this.mm+"-"+this.jj;
-  }
+  formaterDate(date) {
+    if (date) {
+      let d = new Date(date)
+      let month = '' + (d.getMonth() + 1)
+      let day = '' + d.getDate()
+      let year = d.getFullYear();
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+
+      return [year, month, day].join('-');
+    }
   }
 }

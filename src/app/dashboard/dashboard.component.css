@@ -1,0 +1,51 @@
+.card-color{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    top: 12px;
+    text-transform: uppercase;
+    position: relative;
+    color: #000000a3;
+}
+.card-text-success{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    top: 12px;
+    text-transform: uppercase;
+    position: relative;
+    color: #000000a3;
+}
+.card-sousCateg{
+    color: #0000007a !important;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+.card-cat{
+    margin: 20% 0px 0px;
+}
+.big-card{
+    min-height: 200px;
+}
+.card-big{
+    top: 20px !important;
+}
+.card-textCat{
+    color: #0000007a !important;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-style: italic;
+    text-transform: capitalize;
+}
+.card-categorie{
+    margin-top: 50px;
+    text-align: center;
+    opacity: 41%;
+    margin-bottom: 5px;
+}
+.mat-badge-medium.mat-badge-after .mat-badge-content{
+    right: -25px;
+
+}

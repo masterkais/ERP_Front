@@ -3,13 +3,13 @@
       <!-- Progress Column -->
       <ng-container matColumnDef="dateCreated">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date creation </th>
-        <td mat-cell *matCellDef="let row"> {{row.dateCreated}} </td>
+        <td mat-cell *matCellDef="let row"> {{formaterDate(row.dateCreated)}} </td>
       </ng-container>
   
       <!-- Name Column -->
       <ng-container matColumnDef="dateAccpted">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date traitement </th>
-        <td mat-cell *matCellDef="let row"> {{row.dateAccpted}} </td>
+        <td mat-cell *matCellDef="let row"> {{formaterDate(row.dateAccpted)}} </td>
       </ng-container>
       <ng-container matColumnDef="numberPalette">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Numbre palette  </th>

@@ -32,7 +32,7 @@
             aria-expanded="false"
           >
             <i class="material-icons">favorite</i>
-            <span class="notification">{{ caddyService.getSize() }}</span>
+            <span  *ngIf="caddyService.getSize()>0" class="notification">{{ caddyService.getSize() }}</span>
             <p>
               <span class="d-lg-none d-md-block">Some Actions</span>
             </p>
@@ -59,7 +59,7 @@
             aria-expanded="false"
           >
             <i class="material-icons">add_shopping_cart</i>
-            <span class="notification">{{ basketService.getSize() }}</span>
+            <span *ngIf="basketService.getSize()>0" class="notification">{{ basketService.getSize() }}</span>
             <p>
               <span class="d-lg-none d-md-block">Some Actions</span>
             </p>
@@ -86,7 +86,7 @@
             aria-expanded="false"
           >
             <i class="material-icons">notifications</i>
-            <span class="notification">{{ numberRequestTransfert }}</span>
+            <span *ngIf="numberRequestTransfert>0" class="notification">{{ numberRequestTransfert }}</span>
             <p>
               <span class="d-lg-none d-md-block">Some Actions</span>
             </p>

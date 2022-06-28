@@ -1,10 +1,14 @@
-import { DatePipe } from "@angular/common";
+
+
+  import { DatePipe } from "@angular/common";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
+import { lineSales } from "app/shared/models/lineSale.model";
 import { RequestTransfert } from "app/shared/models/requestTransfert.model";
+import { sale } from "app/shared/models/sale.model";
 import { User } from "app/shared/models/user.module";
 import { DialogService } from "app/shared/services/dialog.service";
 import { EntryVoucherService } from "app/shared/services/entryVoucher.model";
@@ -15,32 +19,36 @@ import { UserService } from "app/shared/services/user.service";
 import { NgToastService } from "ng-angular-popup";
 
 @Component({
-  selector: "employer-list-request-transfert",
-  templateUrl: "./employer-list-request-transfert.component.html",
-  styleUrls: ["./employer-list-request-transfert.component.css"],
+  selector: 'list-sales',
+  templateUrl: './list-sales.component.html',
+  styleUrls: ['./list-sales.component.css']
 })
-export class EmployerListRequestTransfertComponent implements OnInit {
+export class ListSalesComponent implements OnInit {
   data: any[] = [];
   displayedColumns: string[] = [
     "dateCreated",
     "dateAccpted",
     "numberPalette",
-    "deliveryManIds",
+    "purchasingManager",
     "state",
-    "siteDestinaion",
-    "siteSource",
+    "client",
+    "totalSale",
     "action",
   ];
   columnsToDisplay: string[] = this.displayedColumns.slice();
-  dataSource!: MatTableDataSource<RequestTransfert>;
+  dataSource!: MatTableDataSource<sale>;
   posts: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  listRequestTransfert: RequestTransfert[];
+  sale: sale[];
   siteSource;
   siteDestination;
-  requestTransfertList: RequestTransfert[];
+  saleList: sale[];
   user: User;
+  client:User;
+  commercial:User;
+  line:lineSales[]=[];
+  total;
   constructor(
     private router: Router,
     private datePipe: DatePipe,
@@ -53,31 +61,39 @@ export class EmployerListRequestTransfertComponent implements OnInit {
     private entryVoucherService: EntryVoucherService
   ) {}
   ngOnInit(): void {
-    this.getAllRequestTransfert();
+    this.getAllSales();
   }
-  async getAllRequestTransfert() {
-    await this.userService
-      .getCurrentUserWithPromise()
-      .then((data) => (this.user = data));
-    this.requestTransfertService.getAllRequestTransfert().subscribe((data) => {
-      this.listRequestTransfert = data;
-      this.dataSource = new MatTableDataSource(data);
+  async getAllSales() {
+    
+    this.requestTransfertService.getAllSales().then((data) => {
+      this.saleList=data;
+      this.saleList.forEach(async (d)=>{
+        await this.saleList.forEach(async (d)=>{
+          await this.userService.getUserByIdV2(d.clientId).then((data)=>{
+            d.clientId=data;
+            console.log("d.clientId -"+d.clientId)
+          });
+          await this.requestTransfertService.getAllLineSales(d.id).then((k)=>{
+        
+            this.total=k.quantity*d.totalSale;
+            console.log("*****"+this.total);
+            console.log("*****"+k.quantity);
+            console.log("*****"+d.totalSale);
+          })
+        
+         await this.userService.getUserByIdV2(d.purchasingManagerId).then((data)=>{
+            d.purchasingManagerId=data;
+            console.log("d.purchasingManagerId -"+JSON.stringify(d.purchasingManagerId))
+          });
+        });
+      })
+      this.dataSource = new MatTableDataSource(this.saleList);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  
   }
-  onEdit(request: RequestTransfert) {}
-  async onSubmitRequestTransfert(request: RequestTransfert) {
-    await this.requestTransfertService
-      .submitRequestTransfert(request.id)
-      .then((data) => {});
-    this.toast.success({
-      detail: "Demande transfert est envoyer avec succée !",
-      duration: 5000,
-    });
-    this.getAllRequestTransfert();
-    //window.location.reload();
-  }
+  
   onDelete(request: RequestTransfert) {}
   onShowLineTransfert(request: RequestTransfert) {
     this.router.navigateByUrl("/requestTransfertLines/" + request.id);
@@ -105,13 +121,15 @@ export class EmployerListRequestTransfertComponent implements OnInit {
       let month = '' + (d.getMonth() + 1)
       let day = '' + d.getDate()
       let year = d.getFullYear();
+      let min=d.getMinutes();
+      let h=d.getHours();
    
        if (month.length < 2) 
            month = '0' + month;
        if (day.length < 2) 
            day = '0' + day;
    
-       return [year, month, day].join('-');
+       return [year, month, day,h,min].join('-');
     }
   }
 }

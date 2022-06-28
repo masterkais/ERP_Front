@@ -3,13 +3,13 @@
       <!-- Progress Column -->
       <ng-container matColumnDef="dateCreated">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date creation </th>
-        <td mat-cell *matCellDef="let row"> {{row.dateCreated[0]}}/{{row.dateCreated[1]}}/{{row.dateCreated[2]}} </td>
+        <td mat-cell *matCellDef="let row"> {{formaterDate(row.dateCreated)}}</td>
       </ng-container>
   
       <!-- Name Column -->
       <ng-container matColumnDef="dateAccpted">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date traitement </th>
-        <td mat-cell *matCellDef="let row"><p *ngIf="row.dateAccpted"> {{row.dateAccpted[0]}}/{{row.dateAccpted[1]}}/{{row.dateAccpted[2]}} </p><span *ngIf="!row.dateAccpted"><mat-icon>minimize</mat-icon></span></td>
+        <td mat-cell *matCellDef="let row"><p *ngIf="row.dateAccpted"> {{formaterDate(row.dateAccpted)}} </p><span *ngIf="!row.dateAccpted"><mat-icon>minimize</mat-icon></span></td>
       </ng-container>
       <ng-container matColumnDef="numberPalette">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Numbre palette  </th>
