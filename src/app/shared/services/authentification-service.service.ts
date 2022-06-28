@@ -10,7 +10,7 @@ import { User } from '../models/user.module';
   providedIn: 'root'
 })
 export class AuthentificationServiceService {
-private host:string="https://acfb-196-179-94-188.eu.ngrok.io";
+private host:string="http://http://192.168.1.37:8081";
 private jwt:string="";
 private jwToken:any;
 private roles:Array<any>=[];

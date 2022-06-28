@@ -52,6 +52,7 @@ export class ListVehiculeComponent implements OnInit {
       this.dataSource = new MatTableDataSource(vehicules);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      console.log(JSON.stringify(vehicules));
     });
   }
 
