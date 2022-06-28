@@ -31,6 +31,9 @@ export class UserService {
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(this.host+"/user/"+id);
   }
+  getUserByIdV2(id: number): Promise<User> {
+    return this.http.get<User>(this.host+"/user/"+id).toPromise();
+  }
   editUser(group: User): Observable<User> {
     return this.http.put<User>(this.host + '/user', group);
   }

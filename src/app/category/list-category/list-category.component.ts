@@ -51,6 +51,7 @@ export class ListCategoryComponent implements OnInit {
       this.dataSource = new MatTableDataSource(categorys);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      console.log(JSON.stringify(categorys));
     });
   }
   getBrand(idBrand):string{

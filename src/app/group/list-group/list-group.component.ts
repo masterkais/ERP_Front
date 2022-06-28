@@ -49,6 +49,7 @@ export class ListGroupComponent implements OnInit {
       this.dataSource = new MatTableDataSource(groups);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      console.log(JSON.stringify(groups));
     });
   }
 

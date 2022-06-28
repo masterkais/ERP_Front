@@ -3,7 +3,9 @@ import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
 import { Category } from "../models/category.model";
+import { lineSales } from "../models/lineSale.model";
 import { RequestTransfert } from "../models/requestTransfert.model";
+import { sale } from "../models/sale.model";
 
 @Injectable({
   providedIn: "root",
@@ -16,6 +18,12 @@ export class RequestTransfertService {
   }
   public getAllRequestTransfertByUser(userId:number): Observable<RequestTransfert[]> {
     return this.http.get<RequestTransfert[]>(this.host + "/requestTransfert/requestTransfers/"+userId);
+  }
+  public getAllSales(): Promise<sale[]> {
+    return this.http.get<sale[]>(this.host + "/salesorder/sales").toPromise();
+  }
+  public getAllLineSales(id): Promise<lineSales> {
+    return this.http.get<lineSales>(this.host + "/ligneSale/lines/"+id).toPromise();
   }
   deleteRequestTransfertById(id: number): Observable<void> {
     return this.http.delete<void>(this.host + "/requestTransfert/delete/" + id);
