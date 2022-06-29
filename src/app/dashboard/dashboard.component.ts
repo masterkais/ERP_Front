@@ -137,7 +137,7 @@ export class DashboardComponent implements OnInit {
     plugins: {
       title: {
           display: true,
-          text: 'Nombre des produits par stock',
+          text: 'Nombre des commande par semestre',
           position: 'bottom'
       }
   }

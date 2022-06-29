@@ -17,7 +17,7 @@
       </ng-container>
       <ng-container matColumnDef="datePurchase">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date d'achat </th>
-        <td mat-cell *matCellDef="let row"> {{row.datePurchase[0]}}/{{row.datePurchase[1]}}/{{row.datePurchase[2]}}
+        <td mat-cell *matCellDef="let row"> {{formaterDate(row.datePurchase)}}
         </td>
       </ng-container>
       <ng-container matColumnDef="state">

@@ -109,7 +109,7 @@
       <!-- Modal body -->
       <div class="modal-body">
         <form [formGroup]="basketFormGroup" (ngSubmit)="onAddToBasket()">
-            <div class="mb-3">
+            <div class="mb-3" *ngIf="show">
                 <label for="Username">id idCategory<span class="text-danger">*</span></label>
                 <input type="text" name="idCategory" class="form-control" id="idCategory" value="{{idCategory}}" placeholder="idCategory">
             </div>

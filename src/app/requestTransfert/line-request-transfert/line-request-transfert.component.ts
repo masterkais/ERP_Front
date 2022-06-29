@@ -60,6 +60,7 @@ export class LineRequestTransfertComponent implements OnInit {
   category:Category;
   siteStockSource:SiteStock;
   qte:number;
+  product:Product;
   constructor(
     private router: Router,
     private datePipe: DatePipe,
@@ -122,6 +123,12 @@ export class LineRequestTransfertComponent implements OnInit {
   
   async getAllLineRequestTransfert() {
     this.lineRequestService.getAllLineRequestTransfertByIdRequest(this.idRequest).subscribe((data) => {
+      data.forEach((async d=>{
+        await this.categoryService.getCategoryByIdV2(d.categoryid).then((d1)=>{
+          d.categoryid=d1;
+        }
+        )
+      }))
       this.linesTransfert = data;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
@@ -131,7 +138,7 @@ export class LineRequestTransfertComponent implements OnInit {
   async onClick(line:LineRequestTransfert)
     {  
       await this.getSiteStockSourceByName();
-       await this.productService.getAllProductByCategoryAndSiteStockPromise(line.categoryid,this.siteStockSource.id).then((data)=>this.products=data)
+       await this.productService.getAllProductByCategoryAndSiteStockPromise(line.categoryid.id,this.siteStockSource.id).then((data)=>this.products=data)
         this.lineTransfert=line;
         this.idLineTransfert = line.id; 
       if(line.quantity<=this.products.length){

@@ -45,6 +45,7 @@ import { DialogQuantityRequestTransertComponent } from "../dialog-quantity-reque
     products:any[];
     product:Product;
     productByCat;
+    show=false;
     constructor(
       public dialog: MatDialog,
       private categoryService: CategoryService,

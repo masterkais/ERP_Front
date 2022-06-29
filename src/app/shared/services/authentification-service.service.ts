@@ -10,7 +10,7 @@ import { User } from '../models/user.module';
   providedIn: 'root'
 })
 export class AuthentificationServiceService {
-private host:string="http://http://192.168.1.37:8081";
+private host:string="http://localhost:8081";
 private jwt:string="";
 private jwToken:any;
 private roles:Array<any>=[];

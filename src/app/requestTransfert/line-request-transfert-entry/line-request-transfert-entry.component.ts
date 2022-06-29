@@ -73,6 +73,7 @@ export class LineRequestTransfertEntryComponent implements OnInit {
   }> = [];
   qte: number;
   entryVoucher: EntryVoucher;
+  show=false;
   constructor(
     private router: Router,
     private datePipe: DatePipe,
@@ -137,6 +138,12 @@ export class LineRequestTransfertEntryComponent implements OnInit {
     await this.lineRequestService
       .getAllLineRequestTransfertByIdRequestV2(this.idRequest)
       .then((data) => {
+        data.forEach((async d=>{
+          await this.categoryService.getCategoryByIdV2(d.categoryid).then((d1)=>{
+            d.categoryid=d1;
+          }
+          )
+        }))
         data.forEach((d) => {
           if (d.state == 3 || d.state == 4) {
             this.linesTransfert.push(d);
